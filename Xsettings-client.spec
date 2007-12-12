@@ -14,7 +14,7 @@ License: 	GPL
 Group: 		System/Libraries
 Source: 	http://matchbox.handhelds.org/sources/optional-dependencies/%{name}-%{version}.tar.bz2
 
-BuildRequires:	XFree86-devel
+BuildRequires:	X11-devel
 Buildroot: 	%_tmppath/%name-%version-buildroot
 
 %description
