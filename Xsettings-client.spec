@@ -1,6 +1,6 @@
 %define name 	Xsettings-client
 %define version	0.10
-%define release 1mdk
+%define release %mkrel 1
 
 %define major 	0
 %define libname %mklibname %name %major
