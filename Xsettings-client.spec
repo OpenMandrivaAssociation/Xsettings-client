@@ -1,21 +1,21 @@
-%define name 	Xsettings-client
-%define version	0.10
-%define release %mkrel 4
-
-%define major 	0
-%define libname %mklibname %name %major
+%define major		0
+%define libname		%mklibname %{name} %{major}
+%define develname	%mklibname %{name} -d
 
 Summary: 	Inter-toolkit configuration settings
-Name: 		%name
-Version: 	%version
-Release: 	%release
-Url: 		http://www.freedesktop.org/standards/xsettings-spec/
-License: 	GPL
+Name: 		Xsettings-client
+Version: 	0.10
+Release: 	%{mkrel 2}
+URL: 		http://www.freedesktop.org/standards/xsettings-spec/
+# Tarball includes a copy of the GPL but the source headers clearly
+# specify an MIT license - AdamW 2008/12
+License: 	MIT
 Group: 		System/Libraries
-Source: 	http://matchbox.handhelds.org/sources/optional-dependencies/%{name}-%{version}.tar.bz2
-
+Source0:	http://matchbox-project.org/sources/optional-dependencies/%{name}-%{version}.tar.bz2
+# Fix underlinking - AdamW 2008/12
+Patch0:		Xsettings-client-0.10-underlink.patch
 BuildRequires:	X11-devel
-Buildroot: 	%_tmppath/%name-%version-buildroot
+Buildroot: 	%_tmppath/%{name}-%{version}-buildroot
 
 %description
 The intent of this specification is to specify a mechanism to allow the
@@ -30,11 +30,11 @@ It is not intended:
 - to be able to store large amounts of data
 - to store complex data types (other than as strings)
 
-%package -n	%libname
+%package -n	%{libname}
 Group:		System/Libraries
 Summary:	Inter-toolkit configuration settings
 
-%description -n %libname
+%description -n %{libname}
 The intent of this specification is to specify a mechanism to allow the
 configuration of settings such as double click timeout, drag-and-drop
 threshold, and default foreground and background colors for all applications
@@ -47,46 +47,48 @@ It is not intended:
 - to be able to store large amounts of data
 - to store complex data types (other than as strings)
 
-%package -n %libname-devel
+%package -n %{develname}
 Group:          Development/C
-Summary:        Static libraries and header files from %name
-Provides:       %name-devel = %version-%release
-Provides:	lib%name-devel = %version-%release
-Requires:       %libname = %version-%release
+Summary:        Static libraries and header files from %{name}
+Provides:       %{name}-devel = %{version}-%{release}
+Provides:	lib%{name}-devel = %{version}-%{release}
+Obsoletes:	%{mklibname Xsettings-client 0 -d}
+Requires:       %{libname} = %{version}-%{release}
 
-%description -n %libname-devel
-Static libraries and header files from %name
+%description -n %{develname}
+Static libraries and header files from %{name}.
 
 %prep
 %setup -q
+%patch0 -p1 -b .underlink
 
 %build
+automake-1.4 --add-missing
 %configure2_5x
 %make
 
 %install
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 %makeinstall
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %if %mdkversion < 200900
-%post -n %libname -p /sbin/ldconfig
+%post -n %{libname} -p /sbin/ldconfig
 %endif
 %if %mdkversion < 200900
-%postun -n %libname -p /sbin/ldconfig
+%postun -n %{libname} -p /sbin/ldconfig
 %endif
 
-%files -n %libname
+%files -n %{libname}
 %defattr(-,root,root)
-%_libdir/*.so.*
+%{_libdir}/*.so.%{major}*
 
-%files -n %libname-devel
+%files -n %{develname}
 %defattr(-,root,root)
 %doc README
-%_libdir/*.so
-%_libdir/*.la
-%_libdir/*.a
-%_includedir/*.h
+%{_libdir}/*.so
+%{_libdir}/*.*a
+%{_includedir}/*.h
 
