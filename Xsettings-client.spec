@@ -15,6 +15,8 @@ Source0:	http://matchbox-project.org/sources/optional-dependencies/%{name}-%{ver
 # Fix underlinking - AdamW 2008/12
 Patch0:		Xsettings-client-0.10-underlink.patch
 BuildRequires:	X11-devel
+# Have to do automake for underlink.patch - AdamW 2008/12
+BuildRequires:	automake1.4
 Buildroot: 	%_tmppath/%{name}-%{version}-buildroot
 
 %description
