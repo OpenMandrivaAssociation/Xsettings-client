@@ -14,9 +14,7 @@ Group: 		System/Libraries
 Source0:	http://matchbox-project.org/sources/optional-dependencies/%{name}-%{version}.tar.bz2
 # Fix underlinking - AdamW 2008/12
 Patch0:		Xsettings-client-0.10-underlink.patch
-BuildRequires:	X11-devel
-# Have to do automake for underlink.patch - AdamW 2008/12
-BuildRequires:	automake1.4
+BuildRequires:	libx11-devel
 Buildroot: 	%_tmppath/%{name}-%{version}-buildroot
 
 %description
@@ -65,13 +63,13 @@ Static libraries and header files from %{name}.
 %patch0 -p1 -b .underlink
 
 %build
-automake-1.4 --add-missing
+autoreconf -fi
 %configure2_5x
 %make
 
 %install
 rm -rf %{buildroot}
-%makeinstall
+%makeinstall_std
 
 %clean
 rm -rf %{buildroot}
