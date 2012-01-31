@@ -5,7 +5,7 @@
 Summary: 	Inter-toolkit configuration settings
 Name: 		Xsettings-client
 Version: 	0.10
-Release: 	%{mkrel 3}
+Release: 	4
 URL: 		http://www.freedesktop.org/standards/xsettings-spec/
 # Tarball includes a copy of the GPL but the source headers clearly
 # specify an MIT license - AdamW 2008/12
@@ -15,7 +15,6 @@ Source0:	http://matchbox-project.org/sources/optional-dependencies/%{name}-%{ver
 # Fix underlinking - AdamW 2008/12
 Patch0:		Xsettings-client-0.10-underlink.patch
 BuildRequires:	libx11-devel
-Buildroot: 	%_tmppath/%{name}-%{version}-buildroot
 
 %description
 The intent of this specification is to specify a mechanism to allow the
@@ -70,6 +69,7 @@ autoreconf -fi
 %install
 rm -rf %{buildroot}
 %makeinstall_std
+rm -f %{buildroot}/%_libdir/*.la
 
 %clean
 rm -rf %{buildroot}
