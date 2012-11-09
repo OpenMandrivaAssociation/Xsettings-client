@@ -1,0 +1,9 @@
+--- Xsettings-client-0.10/Makefile.am	2003-03-28 02:58:34.000000000 -0800
++++ Xsettings-client-0.10/Makefile.am.new	2008-12-10 13:25:48.000000000 -0800
+@@ -9,4 +9,4 @@
+ 
+ libXsettings_client_la_SOURCES= $(source_c) $(source_h)
+ 
+-libXsettings_client_la_LIBADD      = @X_LIBS@
+\ No newline at end of file
++libXsettings_client_la_LIBADD      = @X_LIBS@ -lX11
