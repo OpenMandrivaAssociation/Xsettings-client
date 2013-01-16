@@ -1,0 +1,11 @@
+--- Xsettings-client-0.10/configure.ac.bero	2013-01-16 04:10:26.620558152 +0100
++++ Xsettings-client-0.10/configure.ac	2013-01-16 04:10:32.081493224 +0100
+@@ -1,7 +1,7 @@
+ # Process this file with autoconf to produce a configure script.
+ AC_INIT(xsettings-client.c)
+ AM_INIT_AUTOMAKE(Xsettings-client, 0.10)
+-AM_CONFIG_HEADER(config.h)
++AC_CONFIG_HEADERS([config.h])
+ 
+ CFLAGS="-Os -Wall"
+ 
