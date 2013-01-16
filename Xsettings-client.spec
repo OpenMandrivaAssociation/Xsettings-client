@@ -14,8 +14,8 @@ Group: 		System/Libraries
 Source0:	http://matchbox-project.org/sources/optional-dependencies/%{name}-%{version}.tar.bz2
 # Fix underlinking - AdamW 2008/12
 Patch0:		Xsettings-client-0.10-underlink.patch
+Patch1:		xsettings-automake-1.13.patch
 BuildRequires:	libx11-devel
-Buildroot: 	%_tmppath/%{name}-%{version}-buildroot
 
 %description
 The intent of this specification is to specify a mechanism to allow the
@@ -60,7 +60,7 @@ Static libraries and header files from %{name}.
 
 %prep
 %setup -q
-%patch0 -p1 -b .underlink
+%apply_patches
 
 %build
 autoreconf -fi
