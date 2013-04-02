@@ -1,11 +1,12 @@
 %define major		0
 %define libname		%mklibname %{name} %{major}
 %define develname	%mklibname %{name} -d
+%define debug_package %{nil}
 
 Summary: 	Inter-toolkit configuration settings
 Name: 		Xsettings-client
 Version: 	0.10
-Release: 	%{mkrel 4}
+Release: 	5
 URL: 		http://www.freedesktop.org/standards/xsettings-spec/
 # Tarball includes a copy of the GPL but the source headers clearly
 # specify an MIT license - AdamW 2008/12
