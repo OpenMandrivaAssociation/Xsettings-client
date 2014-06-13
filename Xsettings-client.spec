@@ -6,7 +6,7 @@
 Summary: 	Inter-toolkit configuration settings
 Name: 		Xsettings-client
 Version: 	0.10
-Release: 	10
+Release: 	11
 URL: 		http://www.freedesktop.org/standards/xsettings-spec/
 # Tarball includes a copy of the GPL but the source headers clearly
 # specify an MIT license - AdamW 2008/12
