@@ -1,6 +1,6 @@
-%define major		0
-%define libname		%mklibname %{name} %{major}
-%define develname	%mklibname %{name} -d
+%define major 0
+%define libname %mklibname %{name} %{major}
+%define develname %mklibname %{name} -d
 %define debug_package %{nil}
 
 Summary: 	Inter-toolkit configuration settings
@@ -65,68 +65,17 @@ Static libraries and header files from %{name}.
 
 %build
 autoreconf -fi
-%configure2_5x
+%configure
 %make
 
 %install
-rm -rf %{buildroot}
 %makeinstall_std
 
-%clean
-rm -rf %{buildroot}
-
-%if %mdkversion < 200900
-%post -n %{libname} -p /sbin/ldconfig
-%endif
-%if %mdkversion < 200900
-%postun -n %{libname} -p /sbin/ldconfig
-%endif
 
 %files -n %{libname}
-%defattr(-,root,root)
 %{_libdir}/*.so.%{major}*
 
 %files -n %{develname}
-%defattr(-,root,root)
 %doc README
 %{_libdir}/*.so
-%{_libdir}/*.*a
 %{_includedir}/*.h
-
-
-
-%changelog
-* Wed Feb 02 2011 Funda Wang <fwang@mandriva.org> 0.10-3mdv2011.0
-+ Revision: 634990
-- rebuild
-- tighten BR
-
-* Wed Dec 10 2008 Adam Williamson <awilliamson@mandriva.org> 0.10-2mdv2011.0
-+ Revision: 312614
-- buildrequires automake1.4
-- protect major in file list
-- add underlink.patch (fix underlinking)
-- correct license
-- spec clean
-
-  + Thierry Vignaud <tv@mandriva.org>
-    - rebuild
-    - rebuild
-
-  + Pixel <pixel@mandriva.com>
-    - do not call ldconfig in %%post/%%postun, it is now handled by filetriggers
-
-* Thu Jan 03 2008 Olivier Blin <oblin@mandriva.com> 0.10-1mdv2008.1
-+ Revision: 140994
-- restore BuildRoot
-
-  + Thierry Vignaud <tv@mandriva.org>
-    - kill re-definition of %%buildroot on Pixel's request
-    - buildrequires X11-devel instead of XFree86-devel
-    - use %%mkrel
-    - import Xsettings-client
-
-
-* Fri Jul 16 2004 Austin Acton <austin@mandrake.org> 0.10-1mdk
-- initial package
-
