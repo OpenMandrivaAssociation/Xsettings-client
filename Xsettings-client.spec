@@ -1,12 +1,12 @@
 %define major 0
 %define libname %mklibname %{name} %{major}
 %define develname %mklibname %{name} -d
-%define debug_package %{nil}
+%define _empty_manifest_terminate_build 0
 
 Summary: 	Inter-toolkit configuration settings
 Name: 		Xsettings-client
 Version: 	0.10
-Release: 	16
+Release: 	17
 URL: 		http://www.freedesktop.org/standards/xsettings-spec/
 # Tarball includes a copy of the GPL but the source headers clearly
 # specify an MIT license - AdamW 2008/12
@@ -66,10 +66,10 @@ Static libraries and header files from %{name}.
 %build
 autoreconf -fi
 %configure
-%make
+%make_build
 
 %install
-%makeinstall_std
+%make_install
 
 
 %files -n %{libname}
