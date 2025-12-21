@@ -16,6 +16,11 @@ Source0:	http://matchbox-project.org/sources/optional-dependencies/%{name}-%{ver
 # Fix underlinking - AdamW 2008/12
 Patch0:		Xsettings-client-0.10-underlink.patch
 Patch1:		xsettings-automake-1.13.patch
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	pkgconfig(x11)
 
 %description
